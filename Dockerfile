@@ -30,8 +30,8 @@ RUN apt-get update && \
         python3-watchdog \
         python3-xlrd \
         python3-xlwt \
-        python3-dev \
         gcc \
+        python3-dev \
         xz-utils \
         nano \
         zip \
@@ -42,7 +42,9 @@ RUN apt-get update && \
     && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
     && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+RUN curl -sf -L https://static.rust-lang.org/rustup.sh | sh -s -- -y
+
+RUN source $HOME/.cargo/env
 
 RUN python3 -m pip install paramiko cryptography boto3 botocore pretty_bad_protocol erppeek odooly
 
